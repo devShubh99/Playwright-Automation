@@ -4,6 +4,9 @@ const { link } = require('fs');
 test('Locating multiple elements',async({page})=>{
 
     await page.goto('https://demoblaze.com');
+
+    page.waitForSelector('a');
+
     const links = await page.$$('a');
 
     for(const link of links)
