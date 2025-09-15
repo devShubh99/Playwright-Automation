@@ -1,27 +1,35 @@
-const {test, expect} = require ("@playwright/test")
-test ('Assertions', async({page})=>{
-    await page.goto('https://www.wikipedia.org/');
-    //(1) to have URL 
-    await expect(page).toHaveURL('https://www.wikipedia.org/');
+const {test,expect} = require('@playwright/test')
 
-    //(2) to have title
-    await expect(page).toHaveTitle('Wikipedia');
+test ('AssertionsTest',async ({page})=>{
 
-    //(3) checking an element
-    const logoElement = await page.locator('.central-featured-logo');
-    await expect(logoElement).toBeVisible();
+    await page.goto('https://www.wikipedia.org/')
 
-    //(4) Verify element is enabled or not
-    const searchBox = await page.locator('#searchInput');
-    await expect(searchBox).toBeEnabled();
+    //(1) toHaveURL
+    await expect(page).toHaveURL('https://www.wikipedia.org/')
+    //(2) toHavetitle
+    await expect(page).toHaveTitle('Wikipedia')
+    //(3) toBeVisible
+    const LogoElement = await page.locator('.central-featured-logo')
+    await expect(LogoElement).toBeVisible()
+    //(4) isEnabled or Not
+    const SearchBox =  await page.locator("//input[@id='searchInput']")
+    await expect(SearchBox).toBeEnabled()
+    //(5) isChecked
+    await page.click("//strong[normalize-space()='English']")
+    const Appearance = await page.locator("(//input[@id='skin-client-pref-vector-feature-custom-font-size-value-1'])[1]")
+    await expect (Appearance).toBeChecked()
+    //(6) to check a attribute of an element
+    await expect(SearchBox).toHaveAttribute('type','search')
+    //(7) to Have Text
+    const SearchCTA = await page.getByRole('button', { name: 'Search' })
+    await expect(SearchCTA).toHaveText("Search")
+    //(8) to contain text 
+    await expect(SearchCTA).toContainText("Sea")
 
-    //(5) Verify checkbox is checked or not
-    await page.click("a[id='js-link-box-en'] strong")
-    const smallText = await page.locator('#skin-client-pref-vector-feature-custom-font-size-value-0')
-    await smallText.click()
-    await expect(smallText).toBeChecked
 
-    //(6) Verify an attribute
-    const searchButton = await page.locator("form[id='searchform'] button[class='cdx-button cdx-search-input__end-button']");
-    await expect(searchButton).toHaveAttribute('text');
+    
+
+
+
+
 })
