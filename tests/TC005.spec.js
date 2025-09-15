@@ -25,6 +25,21 @@ test ('AssertionsTest',async ({page})=>{
     await expect(SearchCTA).toHaveText("Search")
     //(8) to contain text 
     await expect(SearchCTA).toContainText("Sea")
+    //(9) input has a valude
+    await SearchBox.fill('Playwright');
+    await expect(SearchBox).toHaveValue('Playwright')
+    //(10) get count of value inside a dropdown
+    /*await page.click("//input[@id='vector-page-tools-dropdown-checkbox']")
+    const Tools = await page.locator("vector-page-tools-dropdown-checkbox")
+    await expect(Tools).toHaveCount(26)*/
+    
+    //(11) to do negative test
+
+    await expect(SearchBox).not.toHaveValue('test')
+
+
+
+
 
 
     
