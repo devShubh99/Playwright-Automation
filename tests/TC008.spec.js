@@ -9,7 +9,7 @@ test('HandlingRadio', async ( {page} ) => {
     await expect(Question1).toBeChecked();
 
     const Question2 = await page.locator("//input[@value='To locate a single web element']");
-    //await Question2.check();
+    await Question2.check();
     await expect(Question2).not.toBeChecked
 
 })
